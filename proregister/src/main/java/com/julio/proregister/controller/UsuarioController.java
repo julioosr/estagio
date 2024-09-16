@@ -17,6 +17,11 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @GetMapping
+    public ResponseEntity<String> getUsuario() {
+        return ResponseEntity.ok("Sucesso!");
+    }
+
     // Listar todos os usuários
     @GetMapping
     public List<Usuario> getAllUsuarios() {

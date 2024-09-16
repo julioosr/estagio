@@ -7,7 +7,6 @@ import com.julio.proregister.model.Usuario;
 import com.julio.proregister.repository.UsuarioRepository;
 import com.julio.proregister.security.TokenService;
 import lombok.RequiredArgsConstructor;
-import org.antlr.v4.runtime.Token;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,9 +24,15 @@ public class ProRegisterController {
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
 
+    public ProRegisterController(UsuarioRepository repository, PasswordEncoder passwordEncoder, TokenService tokenService) {
+        this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
+        this.tokenService = tokenService;
+    }
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequestDTO body) {
-        Usuario usuario = this.repository.findByLogin(body.login()).orElseThrow(new RuntimeException("User not found"));
+        Usuario usuario = this.repository.findByLogin(body.login()).orElseThrow(() -> new RuntimeException("User not found"));
         if(passwordEncoder.matches(usuario.getSenha(), body.Senha())) {
             String token = this.tokenService.generateToken(usuario);
             return ResponseEntity.ok(new ResponseDTO(usuario.getNome(), token));
