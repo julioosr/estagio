@@ -23,7 +23,7 @@ public class UsuarioController {
     }
 
     // Listar todos os usuários
-    @GetMapping
+    @GetMapping("/{lista}")
     public List<Usuario> getAllUsuarios() {
         return usuarioRepository.findAll();
     }

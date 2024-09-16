@@ -24,16 +24,10 @@ public class ProRegisterController {
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
 
-    public ProRegisterController(UsuarioRepository repository, PasswordEncoder passwordEncoder, TokenService tokenService) {
-        this.repository = repository;
-        this.passwordEncoder = passwordEncoder;
-        this.tokenService = tokenService;
-    }
-
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequestDTO body) {
         Usuario usuario = this.repository.findByLogin(body.login()).orElseThrow(() -> new RuntimeException("User not found"));
-        if(passwordEncoder.matches(usuario.getSenha(), body.Senha())) {
+        if(passwordEncoder.matches(body.Senha(), usuario.getSenha())) {
             String token = this.tokenService.generateToken(usuario);
             return ResponseEntity.ok(new ResponseDTO(usuario.getNome(), token));
         }
