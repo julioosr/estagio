@@ -22,12 +22,12 @@ public class TokenService {
 
             String token = JWT.create()
                     .withIssuer("login-proregister")
-                    .withSubject(usuario.getNome())
+                    .withSubject(usuario.getLogin())
                     .withExpiresAt(this.generateExpirationDate())
                     .sign(algorithm);
             return token;
         } catch (JWTCreationException exception) {
-            throw new RuntimeException("Falha na autenticação");
+            throw new RuntimeException("Error while authenticating");
         }
     }
 
