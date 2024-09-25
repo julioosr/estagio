@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/recebimentos")
+@RequestMapping("/recebimento")
 public class RecebimentoController {
 
     @Autowired
