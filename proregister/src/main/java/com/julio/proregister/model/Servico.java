@@ -2,6 +2,7 @@ package com.julio.proregister.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+
 @Entity
 @Table(name = "servico")
 public class Servico {
@@ -16,6 +17,9 @@ public class Servico {
 
     @Column(name = "preco", precision = 8, scale = 2, nullable = false)
     private BigDecimal preco;
+
+    @Column(name = "nome", length = 50)
+    private String nome;
 
     // Getters and Setters
 
@@ -41,5 +45,13 @@ public class Servico {
 
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }
