@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/recebimento")
+@CrossOrigin("*")
 public class RecebimentoController {
 
     @Autowired

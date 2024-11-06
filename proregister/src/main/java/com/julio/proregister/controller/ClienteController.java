@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/cliente")
+@CrossOrigin("*")
 public class ClienteController {
     @Autowired
     private ClienteRepository clienteRepository;
@@ -19,6 +20,7 @@ public class ClienteController {
     // Listar todos os clientes
     @GetMapping
     public List<Cliente> getAllClientes() {
+
         return clienteRepository.findAll();
     }
 

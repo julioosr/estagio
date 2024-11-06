@@ -19,13 +19,12 @@ public class Cliente {
     @Column(name = "telefone", length = 15)
     private String telefone;
 
-    @Column(name = "cpf_cnpj", length = 14, unique = true)
+    @Column(name = "cpf_cnpj", length = 15, unique = true)
     private String cpfCnpj;
 
     @Column(name = "usuario")
     private Integer usuario;
 
-    // Getters e Setters
     public Integer getId() {
         return id;
     }

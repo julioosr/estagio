@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/endereco")
+@CrossOrigin("*")
 public class EnderecoController {
 
     @Autowired
@@ -28,6 +29,12 @@ public class EnderecoController {
     public ResponseEntity<Endereco> getEnderecoById(@PathVariable Integer id) {
         Optional<Endereco> endereco = enderecoRepository.findById(id);
         return endereco.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/cliente/{id}")
+    public ResponseEntity<Endereco> getEnderecoByCliente(@PathVariable Integer id) {
+        Endereco endereco = enderecoRepository.findByCliente(id);
+        return ResponseEntity.ok().body(endereco);
     }
 
     // Criar um novo endereço

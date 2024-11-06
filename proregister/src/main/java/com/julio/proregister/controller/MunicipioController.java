@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/municipio")
+@CrossOrigin("*")
 public class MunicipioController {
 
     @Autowired

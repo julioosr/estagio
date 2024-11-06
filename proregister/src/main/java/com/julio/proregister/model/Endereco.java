@@ -11,7 +11,7 @@ public class Endereco {
     @Column(name = "enderecoid")
     private Integer id;
 
-    @Column(name = "cep", length = 8, nullable = false)
+    @Column(name = "cep", length = 9, nullable = false)
     private String cep;
 
     @Column(name = "rua", length = 30, nullable = false)
@@ -26,11 +26,20 @@ public class Endereco {
     @Column(name = "numero", length = 8, nullable = false)
     private String numero;
 
-    @Column(name = "cliente", nullable = false)
-    private Integer cliente;
+    @ManyToOne
+    @JoinColumn(name = "cliente", nullable = false) // Use o nome da coluna que referenciará o cliente
+    private Cliente cliente; // Mude para a entidade Cliente
 
-    @Column(name = "municipio", nullable = false)
-    private Integer municipio;
+    public Integer getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(Integer municipio) {
+        this.municipio = municipio;
+    }
+
+    @Column(name = "municipio")
+    private Integer municipio; // Considerando que municipio pode ser uma string ou outra entidade
 
     // Getters e Setters
     public Integer getId() {
@@ -81,19 +90,13 @@ public class Endereco {
         this.numero = numero;
     }
 
-    public Integer getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(Integer cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    public Integer getMunicipio() {
-        return municipio;
-    }
 
-    public void setMunicipio(Integer municipio) {
-        this.municipio = municipio;
-    }
 }

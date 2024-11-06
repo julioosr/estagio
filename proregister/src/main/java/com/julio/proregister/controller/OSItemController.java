@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/ordemitem")
+@CrossOrigin("*")
 public class OSItemController {
 
     @Autowired

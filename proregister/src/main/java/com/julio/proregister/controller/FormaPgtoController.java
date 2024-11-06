@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/pagamento")
+@CrossOrigin("*")
 public class FormaPgtoController {
 
     @Autowired

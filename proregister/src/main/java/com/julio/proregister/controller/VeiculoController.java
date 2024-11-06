@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/veiculo")
+@CrossOrigin("*")
 public class VeiculoController {
     @Autowired
     private VeiculoRepository veiculoRepository;
