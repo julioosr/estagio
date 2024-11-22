@@ -1,6 +1,7 @@
 package com.julio.proregister.controller;
 
 import com.julio.proregister.model.Endereco;
+import com.julio.proregister.model.Municipio;
 import com.julio.proregister.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

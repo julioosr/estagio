@@ -20,7 +20,6 @@ public class ClienteController {
     // Listar todos os clientes
     @GetMapping
     public List<Cliente> getAllClientes() {
-
         return clienteRepository.findAll();
     }
 

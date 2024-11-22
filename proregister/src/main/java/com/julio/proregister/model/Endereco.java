@@ -30,18 +30,19 @@ public class Endereco {
     @JoinColumn(name = "cliente", nullable = false) // Use o nome da coluna que referenciará o cliente
     private Cliente cliente; // Mude para a entidade Cliente
 
-    public Integer getMunicipio() {
+    @ManyToOne
+    @JoinColumn (name = "municipio")
+    private Municipio municipio; // Considerando que municipio pode ser uma string ou outra entidade
+
+    // Getters e Setters
+    public Municipio getMunicipio() {
         return municipio;
     }
 
-    public void setMunicipio(Integer municipio) {
+    public void setMunicipio(Municipio municipio) {
         this.municipio = municipio;
     }
 
-    @Column(name = "municipio")
-    private Integer municipio; // Considerando que municipio pode ser uma string ou outra entidade
-
-    // Getters e Setters
     public Integer getId() {
         return id;
     }
