@@ -1,5 +1,6 @@
 package com.julio.proregister.controller;
 
+import com.julio.proregister.model.Endereco;
 import com.julio.proregister.model.Veiculo;
 import com.julio.proregister.repository.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

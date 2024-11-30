@@ -26,11 +26,14 @@ public class Veiculo {
     @Column(name = "renavam", length = 11, unique = true, nullable = false)
     private String renavam;
 
-    @Column(name = "cliente", nullable = false)
-    private Integer cliente;
+    @ManyToOne
+    @JoinColumn(name = "cliente", nullable = false)
+    private Cliente cliente;
 
-    @Column(name = "marca", nullable = false)
-    private Integer marca;
+    // Relacionamento ManyToOne com a marca
+    @ManyToOne
+    @JoinColumn(name = "marca", nullable = false) // nome da coluna que armazena o ID da marca
+    private Marca marca; // Objeto Marca em vez de um Integer
 
     // Getters e Setters
     public Integer getId() {
@@ -81,19 +84,19 @@ public class Veiculo {
         this.renavam = renavam;
     }
 
-    public Integer getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(Integer cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    public Integer getMarca() {
+    public Marca getMarca() {
         return marca;
     }
 
-    public void setMarca(Integer marca) {
+    public void setMarca(Marca marca) {
         this.marca = marca;
     }
 }
