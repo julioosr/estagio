@@ -31,6 +31,15 @@ public class VeiculoController {
         return veiculo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/cliente/{clienteId}")
+    public ResponseEntity<List<Veiculo>> getVeiculosByClienteId(@PathVariable Integer clienteId) {
+        List<Veiculo> veiculos = veiculoRepository.findByClienteId(clienteId);
+        if (veiculos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(veiculos);
+    }
+
     // Criar um novo veículo
     @PostMapping
     public ResponseEntity<Veiculo> createVeiculo(@RequestBody Veiculo veiculo) {
