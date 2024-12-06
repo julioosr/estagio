@@ -48,6 +48,7 @@ public class RecebimentoController {
                     recebimento.setOs(recebimentoDetails.getOs());
                     recebimento.setFormaPgto(recebimentoDetails.getFormaPgto());
                     recebimento.setUsuario(recebimentoDetails.getUsuario());
+                    recebimento.setValor_em_aberto(recebimentoDetails.getValor_em_aberto());
                     Recebimento updatedRecebimento = recebimentoRepository.save(recebimento);
                     return ResponseEntity.ok(updatedRecebimento);
                 })
