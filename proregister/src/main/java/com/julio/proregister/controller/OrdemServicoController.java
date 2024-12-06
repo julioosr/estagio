@@ -20,43 +20,54 @@ public class OrdemServicoController {
 
     // Listar todas as ordens de serviço
     @GetMapping
-    public List<OrdemServico> getAllOrdens() {
+    public List<OrdemServico> getAllOrdemServicos() {
         return ordemServicoRepository.findAll();
+    }
+
+    // Buscar ordens de serviço por cliente
+    @GetMapping("/cliente")
+    public ResponseEntity<List<OrdemServico>> buscarPorCliente(@RequestParam Integer clienteId) {
+        List<OrdemServico> ordens = ordemServicoRepository.findByClienteId(clienteId);
+        if (ordens.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 se não houver ordens
+        }
+        return ResponseEntity.ok(ordens); // Retorna a lista de ordens com status 200
     }
 
     // Buscar ordem de serviço por ID
     @GetMapping("/{id}")
-    public ResponseEntity<OrdemServico> getOrdemById(@PathVariable Integer id) {
-        Optional<OrdemServico> ordem = ordemServicoRepository.findById(id);
-        return ordem.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<OrdemServico> getOrdemServicoById(@PathVariable Integer id) {
+        Optional<OrdemServico> ordemServico = ordemServicoRepository.findById(id);
+        return ordemServico.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // Criar uma nova ordem de serviço
     @PostMapping
-    public ResponseEntity<OrdemServico> createOrdem(@RequestBody OrdemServico ordemServico) {
-        OrdemServico novaOrdem = ordemServicoRepository.save(ordemServico);
-        return new ResponseEntity<>(novaOrdem, HttpStatus.CREATED);
+    public ResponseEntity<OrdemServico> createOrdemServico(@RequestBody OrdemServico ordemServico) {
+        OrdemServico novaOrdemServico = ordemServicoRepository.save(ordemServico);
+        return new ResponseEntity<>(novaOrdemServico, HttpStatus.CREATED);
     }
 
     // Atualizar uma ordem de serviço existente
     @PutMapping("/{id}")
-    public ResponseEntity<OrdemServico> updateOrdem(@PathVariable Integer id, @RequestBody OrdemServico ordemAtualizada) {
-        return ordemServicoRepository.findById(id).map(ordem -> {
-            ordem.setDataAgenda(ordemAtualizada.getDataAgenda());
-            ordem.setHorario(ordemAtualizada.getHorario());
-            ordem.setDataRealizada(ordemAtualizada.getDataRealizada());
-            ordem.setTotal(ordemAtualizada.getTotal());
-            ordem.setCliente(ordemAtualizada.getCliente());
-            ordem.setVeiculo(ordemAtualizada.getVeiculo());
-            ordem.setUsuario(ordemAtualizada.getUsuario());
-            ordemServicoRepository.save(ordem);
-            return ResponseEntity.ok(ordem);
+    public ResponseEntity<OrdemServico> updateOrdemServico(@PathVariable Integer id, @RequestBody OrdemServico ordemServicoAtualizada) {
+        return ordemServicoRepository.findById(id).map(ordemServico -> {
+            ordemServico.setDataAgenda(ordemServicoAtualizada.getDataAgenda());
+            ordemServico.setHorario(ordemServicoAtualizada.getHorario());
+            ordemServico.setDataRealizada(ordemServicoAtualizada.getDataRealizada());
+            ordemServico.setTotal(ordemServicoAtualizada.getTotal());
+            ordemServico.setCliente(ordemServicoAtualizada.getCliente());
+            ordemServico.setVeiculo(ordemServicoAtualizada.getVeiculo());
+            ordemServico.setUsuario(ordemServicoAtualizada.getUsuario());
+            ordemServico.setServico(ordemServicoAtualizada.getServico());
+            ordemServicoRepository.save(ordemServico);
+            return ResponseEntity.ok(ordemServico);
         }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // Excluir uma ordem de serviço
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOrdem(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteOrdemServico(@PathVariable Integer id) {
         if (ordemServicoRepository.existsById(id)) {
             ordemServicoRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -22,14 +22,28 @@ public class Recebimento {
     @Column(name = "desconto")
     private BigDecimal desconto;
 
-    @Column(name = "os")
-    private Integer os;
+    @ManyToOne
+    @JoinColumn(name = "os")
+    private OrdemServico os;
 
-    @Column(name = "formapgto")
-    private Integer formaPgto;
+    @ManyToOne
+    @JoinColumn(name = "formapgto")
+    private FormaPgto formaPgto;
 
-    @Column(name = "usuario")
-    private Integer usuario;
+    @ManyToOne
+    @JoinColumn(name = "usuario")
+    private Usuario usuario;
+
+    public BigDecimal getValor_em_aberto() {
+        return valor_em_aberto;
+    }
+
+    public void setValor_em_aberto(BigDecimal valor_em_aberto) {
+        this.valor_em_aberto = valor_em_aberto;
+    }
+
+    @Column(name = "valor_em_aberto")
+    private BigDecimal valor_em_aberto;
 
     // Getters and Setters
 
@@ -65,27 +79,27 @@ public class Recebimento {
         this.desconto = desconto;
     }
 
-    public Integer getOs() {
-        return os;
-    }
-
-    public void setOs(Integer os) {
-        this.os = os;
-    }
-
-    public Integer getFormaPgto() {
+    public FormaPgto getFormaPgto() {
         return formaPgto;
     }
 
-    public void setFormaPgto(Integer formaPgto) {
+    public void setFormaPgto(FormaPgto formaPgto) {
         this.formaPgto = formaPgto;
     }
 
-    public Integer getUsuario() {
+    public OrdemServico getOs() {
+        return os;
+    }
+
+    public void setOs(OrdemServico os) {
+        this.os = os;
+    }
+
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Integer usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 }

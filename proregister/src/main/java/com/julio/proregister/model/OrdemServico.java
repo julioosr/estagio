@@ -1,9 +1,9 @@
 package com.julio.proregister.model;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "os")
@@ -12,12 +12,12 @@ public class OrdemServico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ordemid")
-    private Integer ordemID;
+    private Integer id;
 
     @Column(name = "dataagenda")
     private LocalDate dataAgenda;
 
-    @Column(name = "horario")
+    @Column(name = "horario", nullable = false)
     private LocalTime horario;
 
     @Column(name = "datarealizada")
@@ -26,22 +26,29 @@ public class OrdemServico {
     @Column(name = "total", precision = 18, scale = 2)
     private BigDecimal total;
 
-    @Column(name = "cliente")
-    private Integer cliente;
+    @ManyToOne
+    @JoinColumn(name = "cliente", nullable = false)
+    private Cliente cliente;
 
-    @Column(name = "veiculo")
-    private Integer veiculo;
+    @ManyToOne
+    @JoinColumn(name = "veiculo", nullable = false)
+    private Veiculo veiculo;
 
-    @Column(name = "usuario")
-    private Integer usuario;
+    @ManyToOne
+    @JoinColumn(name = "usuario")
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "servico")
+    private Servico servico;
 
     // Getters e Setters
-    public Integer getOrdemID() {
-        return ordemID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setOrdemID(Integer ordemID) {
-        this.ordemID = ordemID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public LocalDate getDataAgenda() {
@@ -76,27 +83,35 @@ public class OrdemServico {
         this.total = total;
     }
 
-    public Integer getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(Integer cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    public Integer getVeiculo() {
+    public Veiculo getVeiculo() {
         return veiculo;
     }
 
-    public void setVeiculo(Integer veiculo) {
+    public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
     }
 
-    public Integer getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Integer usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Servico getServico() {
+        return servico;
+    }
+
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 }
